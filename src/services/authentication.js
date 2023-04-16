@@ -1,18 +1,16 @@
-export function setUserLoggedIn(data) {
-    const { token, profile } = data
-    localStorage.setItem('token', token)
-    localStorage.setItem('profile', JSON.stringify(profile))
+export function getUserProfile() {
+    return this.getCurrentSession()?.profile;
 }
 
-export function getUserProfile() {
-    return JSON.parse(localStorage.getItem('profile'))
+export function getCurrentSession() {
+    return JSON.parse(localStorage.getItem('auth'))
 }
+
 export function isUserLoggedIn() {
-    const token = localStorage.getItem('token')
-    return token !== null && token !== undefined
+    const session = getCurrentSession()
+    return session !== null && session !== undefined
 }
 
 export function clearUserStorage() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('profile')
+    localStorage.removeItem('auth')
 }

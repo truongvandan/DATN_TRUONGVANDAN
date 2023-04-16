@@ -1,9 +1,10 @@
 import React from 'react'
 import Navigition from './Navigation'
-import {Image, Menu, MenuButton, MenuList, MenuItem, Button} from '@chakra-ui/react'
+import {Image, Menu, MenuButton, MenuList, MenuItem, Button, Heading} from '@chakra-ui/react'
 import {ChevronDownIcon} from '@chakra-ui/icons';
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth';
+import { ROUTES } from '../../contants/router';
 
 function Header() {
   const [session, setSession] = useAuth()
@@ -14,13 +15,13 @@ function Header() {
 
   function doLogout() {
     setSession(null)
-    navigate('/login')
+    navigate('/')
   }
 
   return (
     <header className='page-header'>
       <div className='page-top-bar flex justify-between items-center container mx-auto'>
-        <a href='/vaccines'>
+        <a href='/'>
           <Image
             borderRadius='full'
             boxSize='100px'
@@ -41,7 +42,7 @@ function Header() {
         )}
 
         {!isloggedIn && (
-          <Link to="/login">
+          <Link to={ROUTES.login}>
               <Button colorScheme='blue' variant='outline'>Đăng nhập</Button>
           </Link>
         )}

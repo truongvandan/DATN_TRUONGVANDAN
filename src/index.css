@@ -21,3 +21,15 @@ html, body {
 main {
   flex: 1
 }
+
+.login-wrapper,
+.register-wrapper {
+  background-image: url(/images/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-container,
+.register-container {
+  background-color: #fff;
+}

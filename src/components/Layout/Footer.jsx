@@ -3,7 +3,7 @@ import { Link, Text } from '@chakra-ui/react'
 
 function Footer() {
   return (
-    <footer className='page-footer h-24 flex'>
+    <footer className='page-footer py-6 flex'>
       <div className='container mx-auto flex items-center justify-end'>
         <div className='contact'>
           <Link to="tel:+842873006595">Hotline: <span className='hotline'>028 7300 6595</span></Link>

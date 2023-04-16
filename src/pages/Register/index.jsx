@@ -2,10 +2,11 @@ import React from 'react'
 import {FormControl, FormLabel, Input, Button, FormErrorMessage, useToast} from '@chakra-ui/react'
 import { Formik, Form, Field,  } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
-import { post } from '../../services/http-request';
+import { postReq } from '../../services/http-request';
 
-import { EMAIL_REGEX } from '../../contants/regex'
 import { MESSAGE } from '../../contants/message'
+import { ROUTES } from '../../contants/router';
+import { validateEmail, validatePassword, validatePhoneNumber, validateRequired } from '../../helpers/validation'
 
 function Register() {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Register() {
 
     const doSubmit = async (values) => {
         try {
-            await post('register', values);
+            await postReq('register', values);
             toast({
                 description: MESSAGE.createAccountSuccess,
                 status: 'success',
@@ -21,7 +22,7 @@ function Register() {
                 isClosable: true,
                 position: 'top-right'
             })      
-            navigate('/login')
+            navigate(ROUTES.login)
         } catch (error) {
             toast({
                 description: error.message,
@@ -33,49 +34,6 @@ function Register() {
         }
     }
 
-    function validateEmail(value) {
-        let error
-        if (!value) {
-          error = MESSAGE.required
-        } else if (!EMAIL_REGEX.test(value)) {
-          error = MESSAGE.emailRegexInvalid
-        }
-        return error
-    }
-
-    function validatePassword(value) {
-        let error;
-        if (!value) {
-            error = MESSAGE.required
-        }
-        return error
-    }
-
-    function validateName(value) {
-        let error;
-        if (!value) {
-            error = MESSAGE.required
-        }
-        return error
-    }
-
-    function validatePhoneNumber(value) {
-        let error;
-        if (!value) {
-            error = MESSAGE.required
-        }
-        return error
-    }
-
-    function validateConfirmPassword(value) {
-        let error;
-        if (!value) {
-            error = MESSAGE.required
-        }
-
-        return error
-    }
-
     return (
         <div className='register-wrapper flex items-center justify-center h-full'>
             <div className='register-container w-96 p-8 shadow-md'>
@@ -83,7 +41,6 @@ function Register() {
                     initialValues={{
                         email: '',
                         password: '',
-                        confirmPassword: '',
                         name: '',
                         phoneNumber: '',
                     }}
@@ -101,7 +58,7 @@ function Register() {
                                     </FormControl>
                                     )}
                                 </Field>
-                                <Field name='name' validate={validateName}>
+                                <Field name='name' validate={validateRequired}>
                                     {({ field, form }) => (
                                     <FormControl isInvalid={form.errors.name && form.touched.name}>
                                         <FormLabel>Tên</FormLabel>
@@ -128,19 +85,10 @@ function Register() {
                                     </FormControl>
                                     )}
                                 </Field>
-                                <Field name='confirmPassword' validate={validateConfirmPassword}>
-                                    {({ field, form }) => (
-                                    <FormControl isInvalid={form.errors.confirmPassword && form.touched.confirmPassword}>
-                                        <FormLabel>Xác nhận mật khẩu</FormLabel>
-                                        <Input {...field} type='password' />
-                                        <FormErrorMessage>{form.errors.confirmPassword}</FormErrorMessage>
-                                    </FormControl>
-                                    )}
-                                </Field>
 
                                 <Button colorScheme='blue' type='submit'>Tạo tài khoản</Button>
-                                <Link to="/login" className='text-center'>
-                                    Qua về trang Login
+                                <Link to={ROUTES.login} className='text-center'>
+                                    Quay về trang Login
                                 </Link>
             
                             </div>
