@@ -3,12 +3,12 @@ import { FormControl, Input, Box, Text, Card, CardBody, Stack, Image, Heading, u
 import { Formik, Form, Field } from 'formik'
 import useSWR from 'swr'
 import { Link } from 'react-router-dom'
-import Layout from '../../components/Layout'
-import { fetcher } from '../../services/fetcher'
-import { useAuth } from '../../hooks/useAuth';
-import { ROUTES } from '../../contants/router'
-import PageLoading from '../../components/PageLoading'
-import { PAGE_SIZE, NO_DATA_FOUND } from '../../contants/app-config'
+import Layout from '@/components/Layout'
+import { fetcher } from '@/services/fetcher'
+import { useAuth } from '@/hooks/useAuth';
+import { ROUTES } from '@/contants/router'
+import PageLoading from '@/components/PageLoading'
+import { PAGE_SIZE, NO_DATA_FOUND } from '@/contants/app-config'
 
 function Home() {
   const [page, setPage] = useState(1);

@@ -2,14 +2,14 @@ import React from 'react'
 import { Box, Heading, useToast } from '@chakra-ui/react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useSWR from 'swr'
-import { fetcher } from '../../../services/fetcher'
-import { putReq } from '../../../services/http-request';
-import { MESSAGE } from '../../../contants/message'
-import Layout from '../../../components/Layout'
-import { ROUTES } from '../../../contants/router'
-import VaccineForm from '../../../components/VaccineForm'
-import { useAuth } from '../../../hooks/useAuth'
-import PageLoading from '../../../components/PageLoading'
+import { fetcher } from '@/services/fetcher'
+import { putReq } from '@/services/http-request';
+import { MESSAGE } from '@/contants/message'
+import Layout from '@/components/Layout'
+import { ROUTES } from '@/contants/router'
+import VaccineForm from '@/components/VaccineForm'
+import { useAuth } from '@/hooks/useAuth'
+import PageLoading from '@/components/PageLoading'
 
 function VaccineEdit() {
     const navigate = useNavigate();

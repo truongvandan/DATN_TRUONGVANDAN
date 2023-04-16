@@ -3,10 +3,10 @@ import { FormControl, FormLabel, Input, Button, FormErrorMessage, useToast, Head
 import { Link, useNavigate } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik'
 
-import { postReq } from '../../services/http-request';
-import { useAuth } from '../../hooks/useAuth'
-import { ROUTES } from '../../contants/router'
-import { validateEmail, validateRequired } from '../../helpers/validation'
+import { postReq } from '@/services/http-request';
+import { useAuth } from '@/hooks/useAuth'
+import { ROUTES } from '@/contants/router'
+import { validateEmail, validateRequired } from '@/helpers/validation'
 
 function Login() {
     const navigate = useNavigate();

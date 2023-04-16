@@ -2,10 +2,10 @@ import React from 'react'
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Textarea, Select } from '@chakra-ui/react'
 import { Formik, Form, Field } from 'formik'
 import useSWR from 'swr'
-import { fetcher } from './../../services/fetcher'
-import PageLoading from '../PageLoading'
-import { validateRequired, validatePrice } from '../../helpers/validation'
-import { useAuth } from '../../hooks/useAuth';
+import { fetcher } from '@/services/fetcher'
+import PageLoading from '@/components/PageLoading'
+import { validateRequired, validatePrice } from '@/helpers/validation'
+import { useAuth } from '@/hooks/useAuth';
 
 import {
     NumberInput,

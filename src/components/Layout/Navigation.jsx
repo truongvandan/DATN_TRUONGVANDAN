@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useResolvedPath } from "react-router-dom"
-import { useAuth } from '../../hooks/useAuth'
-import { ROUTES } from '../../contants/router'
+import { useAuth } from '@/hooks/useAuth'
+import { ROUTES } from '@/contants/router'
 
 const navigationConfig = {
   guest: [

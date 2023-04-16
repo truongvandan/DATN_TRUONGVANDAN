@@ -1,6 +1,6 @@
 import React from 'react'
 import { Spinner, Flex, Center } from '@chakra-ui/react'
-import Layout from '../Layout'
+import Layout from '@/components/Layout'
 
 const PageLoading = () => {
     return (

@@ -21,15 +21,15 @@ import {
 } from '@chakra-ui/react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import useSWR from 'swr'
-import { fetcher } from '../../services/fetcher'
-import Layout from '../../components/Layout'
-import { useAuth } from '../../hooks/useAuth'
-import { deleteReq } from '../../services/http-request'
-import { MESSAGE } from '../../contants/message'
+import { fetcher } from '@/services/fetcher'
+import Layout from '@/components/Layout'
+import { useAuth } from '@/hooks/useAuth'
+import { deleteReq } from '@/services/http-request'
+import { MESSAGE } from '@/contants/message'
 import { format } from 'date-fns'
-import { ROUTES } from '../../contants/router'
-import PageLoading from '../../components/PageLoading'
-import { PAGE_SIZE, NO_DATA_FOUND } from '../../contants/app-config'
+import { ROUTES } from '@/contants/router'
+import PageLoading from '@/components/PageLoading'
+import { PAGE_SIZE, NO_DATA_FOUND } from '@/contants/app-config'
 
 function InjectionSchedule() {
     const toast = useToast()

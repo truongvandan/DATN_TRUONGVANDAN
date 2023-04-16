@@ -23,13 +23,13 @@ import {
     useParams
 } from 'react-router-dom'
 import useSWR from 'swr'
-import { MESSAGE } from '../../../contants/message'
-import Layout from '../../../components/Layout'
-import { fetcher } from '../../../services/fetcher'
-import { useAuth } from '../../../hooks/useAuth';
-import { ROUTES } from '../../../contants/router'
-import { deleteReq } from '../../../services/http-request'
-import PageLoading from '../../../components/PageLoading'
+import { MESSAGE } from '@/contants/message'
+import Layout from '@/components/Layout'
+import { fetcher } from '@/services/fetcher'
+import { useAuth } from '@/hooks/useAuth';
+import { ROUTES } from '@/contants/router'
+import { deleteReq } from '@/services/http-request'
+import PageLoading from '@/components/PageLoading'
 
 function VaccineDetail() {
     const navigate = useNavigate();

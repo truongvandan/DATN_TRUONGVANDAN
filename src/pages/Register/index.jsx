@@ -2,11 +2,11 @@ import React from 'react'
 import {FormControl, FormLabel, Input, Button, FormErrorMessage, useToast} from '@chakra-ui/react'
 import { Formik, Form, Field,  } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
-import { postReq } from '../../services/http-request';
+import { postReq } from '@/services/http-request';
 
-import { MESSAGE } from '../../contants/message'
-import { ROUTES } from '../../contants/router';
-import { validateEmail, validatePassword, validatePhoneNumber, validateRequired } from '../../helpers/validation'
+import { MESSAGE } from '@/contants/message'
+import { ROUTES } from '@/contants/router';
+import { validateEmail, validatePassword, validatePhoneNumber, validateRequired } from '@/helpers/validation'
 
 function Register() {
     const navigate = useNavigate();

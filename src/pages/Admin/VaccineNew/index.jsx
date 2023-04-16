@@ -1,11 +1,11 @@
 import React from 'react'
 import { Box, useToast, Heading } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import { MESSAGE } from '../../../contants/message'
-import Layout from '../../../components/Layout'
-import { ROUTES } from '../../../contants/router'
-import VaccineForm from '../../../components/VaccineForm'
-import { postReq } from '../../../services/http-request'
+import { MESSAGE } from '@/contants/message'
+import Layout from '@/components/Layout'
+import { ROUTES } from '@/contants/router'
+import VaccineForm from '@/components/VaccineForm'
+import { postReq } from '@/services/http-request'
 
 function VaccineEdit() {
     const navigate = useNavigate();

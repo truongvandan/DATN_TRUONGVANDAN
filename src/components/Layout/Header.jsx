@@ -3,8 +3,8 @@ import Navigition from './Navigation'
 import {Image, Menu, MenuButton, MenuList, MenuItem, Button, Heading} from '@chakra-ui/react'
 import {ChevronDownIcon} from '@chakra-ui/icons';
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth';
-import { ROUTES } from '../../contants/router';
+import { useAuth } from '@/hooks/useAuth';
+import { ROUTES } from '@/contants/router';
 
 function Header() {
   const [session, setSession] = useAuth()

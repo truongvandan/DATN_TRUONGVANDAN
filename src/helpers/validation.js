@@ -1,5 +1,5 @@
-import { MESSAGE } from './../contants/message'
-import { EMAIL_REGEX, PASSWORD_REGEX, PHONE_NUMBER_REGEX } from './../contants/regex'
+import { MESSAGE } from '@/contants/message'
+import { EMAIL_REGEX, PASSWORD_REGEX, PHONE_NUMBER_REGEX } from '@/contants/regex'
 
 export const validateRequired = (value) => {
     let error;

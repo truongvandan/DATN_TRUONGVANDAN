@@ -2,16 +2,16 @@ import React from 'react'
 import {FormControl, FormLabel, Button, FormErrorMessage, useToast, Select, FormHelperText} from '@chakra-ui/react'
 import { Formik, Form, Field,  } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
-import { postReq } from '../../services/http-request';
+import { postReq } from '@/services/http-request';
 import useSWR from 'swr'
-import { fetcher } from '../../services/fetcher'
-import { MESSAGE } from '../../contants/message'
-import { ROUTES } from '../../contants/router';
-import DatePickerField from '../../components/DatepickerField'
-import Layout from '../../components/Layout'
+import { fetcher } from '@/services/fetcher'
+import { MESSAGE } from '@/contants/message'
+import { ROUTES } from '@/contants/router';
+import DatePickerField from '@/components/DatepickerField'
+import Layout from '@/components/Layout'
 import { format, addDays } from 'date-fns'
-import { validateRequired } from '../../helpers/validation'
-import PageLoading from '../../components/PageLoading'
+import { validateRequired } from '@/helpers/validation'
+import PageLoading from '@/components/PageLoading'
 
 function injectioRegister() {
     const navigate = useNavigate()

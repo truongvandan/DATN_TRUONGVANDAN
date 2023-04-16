@@ -15,11 +15,11 @@ import {
 } from '@chakra-ui/react'
 import { Formik, Form, Field } from 'formik'
 import useSWR from 'swr'
-import { fetcher } from '../../../services/fetcher'
-import Layout from '../../../components/Layout'
-import { useAuth } from '../../../hooks/useAuth'
-import PageLoading from '../../../components/PageLoading'
-import { PAGE_SIZE, NO_DATA_FOUND } from '../../../contants/app-config'
+import { fetcher } from '@/services/fetcher'
+import Layout from '@/components/Layout'
+import { useAuth } from '@/hooks/useAuth'
+import PageLoading from '@/components/PageLoading'
+import { PAGE_SIZE, NO_DATA_FOUND } from '@/contants/app-config'
 import { format } from 'date-fns'
 
 function InjectionScheduleForAdmin() {
