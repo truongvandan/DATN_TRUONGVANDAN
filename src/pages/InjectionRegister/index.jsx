@@ -7,7 +7,7 @@ import useSWR from 'swr'
 import { fetcher } from '@/services/fetcher'
 import { MESSAGE } from '@/contants/message'
 import { ROUTES } from '@/contants/router';
-import DatePickerField from '@/components/DatepickerField'
+import DatePickerField from '@/components/DatePickerField'
 import Layout from '@/components/Layout'
 import { format, addDays } from 'date-fns'
 import { validateRequired } from '@/helpers/validation'
