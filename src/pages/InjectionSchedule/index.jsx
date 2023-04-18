@@ -38,6 +38,8 @@ function InjectionSchedule() {
     const [session] = useAuth()
     const [page, setPage] = useState(1);
 
+    const [selectedId, setSelectedId] = useState(null)
+
     const { data, mutate, error, isLoading } = useSWR([`${import.meta.env.VITE_API_SERVER}/injections-register?page=${page}&limit=${PAGE_SIZE}`, {
         headers: {
             Authorization: session.token
@@ -49,7 +51,6 @@ function InjectionSchedule() {
             <PageLoading></PageLoading>
         )
     }
-    
 
     const handlePreviousPage = () => {
         let newPage = page - 1
@@ -67,11 +68,11 @@ function InjectionSchedule() {
         setPage(newPage)
     }
 
-    const cancel = async (id, event) => {
+    const cancel = async () => {
         try {
-            await deleteReq(`injections-register/${id}`);
+            await deleteReq(`injections-register/${selectedId}`);
             mutate(
-                data.filter(i => i.id !== id)
+                data.filter(i => i.id !== selectedId)
             )
 
             toast({
@@ -90,6 +91,12 @@ function InjectionSchedule() {
                 position: 'top-right'
             })      
         }
+        onClose()
+    }
+
+    const cancelSchedule = (id) => {
+        setSelectedId(id)
+        onOpen()
     }
 
     const hasData = Boolean(data?.length)
@@ -122,7 +129,7 @@ function InjectionSchedule() {
                                     <Td>{format(new Date(data.injectionDay), 'yyyy-MM-dd')}</Td>
                                     <Td className='text-right'>
                                         <Link to={`${ROUTES.injectionScheduleEdit}/${data.id}`}><Button colorScheme='blue' variant='outline'>Chỉnh sửa</Button></Link>
-                                        <Button colorScheme='red' onClick={onOpen} className='ml-4'>Hủy</Button>
+                                        <Button colorScheme='red' onClick={() => cancelSchedule(data.id)} className='ml-4'>Hủy</Button>
                                     </Td>
                                 </Tr>
                             ))}
