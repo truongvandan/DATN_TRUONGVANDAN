@@ -113,8 +113,7 @@ function VaccineDetail() {
                 <HStack spacing='24px' className='mb-8'>
                     <Box w='300px' h='auto' className='flex'>
                         <Image
-                            // src={item.image}
-                            src='/images/vx_1.jpg'
+                            src={data?.image}
                             alt='vaccine'
                             borderRadius='lg'
                         />

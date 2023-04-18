@@ -100,8 +100,7 @@ function Home() {
                     <CardBody>
                       <Link to={`${ROUTES.detailVaccine}/${item.id}`}>
                         <Image
-                          // src={item.image}
-                          src='/images/vx_1.jpg'
+                          src={item.image}
                           alt='vaccine'
                           borderRadius='lg'
                         />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormControl, FormLabel, Input, Button, FormErrorMessage, Textarea, Select } from '@chakra-ui/react'
+import { FormControl, FormLabel, Input, Button, FormErrorMessage, Textarea, Select, Box, Image } from '@chakra-ui/react'
 import { Formik, Form, Field } from 'formik'
 import useSWR from 'swr'
 import { fetcher } from '@/services/fetcher'
@@ -7,10 +7,12 @@ import PageLoading from '@/components/PageLoading'
 import { validateRequired, validatePrice } from '@/helpers/validation'
 import { useAuth } from '@/hooks/useAuth';
 
+
 import {
     NumberInput,
     NumberInputField,
   } from '@chakra-ui/react'
+import DropboxImageChooser from '../DropboxImageChooser'
 
 function VaccineForm({initialValues, onSubmit}) {
     const [session] = useAuth()
@@ -20,7 +22,6 @@ function VaccineForm({initialValues, onSubmit}) {
             Authorization: session.token
         }
     }], fetcher)
-
 
     return (
         <Formik
@@ -53,6 +54,16 @@ function VaccineForm({initialValues, onSubmit}) {
                                 </FormControl>
                             )}
                         </Field>
+                        <Field name='image' validate={validateRequired}>
+                            {({ field, form }) => (
+                               <FormControl isInvalid={form.errors.description && form.touched.description}>
+                                    <FormLabel>Image</FormLabel>
+                                    <DropboxImageChooser {...field} />
+                                    <FormErrorMessage>{form.errors.description}</FormErrorMessage>
+                                </FormControl>
+                            )}
+                        </Field>
+
                         <Field name='description' validate={validateRequired}>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.description && form.touched.description}>
