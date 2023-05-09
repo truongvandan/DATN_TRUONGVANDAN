@@ -11,5 +11,6 @@ export const MESSAGE = {
     injectionRegisterSuccess: 'Đăng ký tiêm thành công',
     updateInjectionRegisterSuccess: 'Lịch tiêm cập nhật thông tin thành công',
     removeInjectionRegisterSuccess: 'Hủy lịch tiêm thành công',
+    injectedSuccess: 'Chuyển trạng thái đã tiêm thành công',
     error: 'Xảy ra lỗi, vui lòng liên hệ quản trị viên'
 }

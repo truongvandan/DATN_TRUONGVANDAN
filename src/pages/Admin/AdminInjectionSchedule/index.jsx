@@ -12,6 +12,15 @@ import {
     Heading,
     Input,
     FormControl,
+    Link,
+    useDisclosure,
+    useToast,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
 } from '@chakra-ui/react'
 import { Formik, Form, Field } from 'formik'
 import useSWR from 'swr'
@@ -21,15 +30,23 @@ import { useAuth } from '@/hooks/useAuth'
 import PageLoading from '@/components/PageLoading'
 import { PAGE_SIZE, NO_DATA_FOUND } from '@/contants/app-config'
 import { format } from 'date-fns'
+import { MESSAGE } from '@/contants/message'
+import { putReq } from '@/services/http-request'
 
 function InjectionScheduleForAdmin() {
+    const toast = useToast()
     const [session] = useAuth()
     const isloggedIn = !!session;
     const {profile} = session || {}
     const [page, setPage] = useState(1);
     const [searchText, setSearchText] = useState('')
 
-    const { data, error, isLoading } = useSWR([`${import.meta.env.VITE_API_SERVER}/injections-management?page=${page}&limit=${PAGE_SIZE}&search=${searchText}`, {
+    const [selectedId, setSelectedId] = useState(null)
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const cancelRef = React.useRef()
+
+    const { data, mutate, error, isLoading } = useSWR([`${import.meta.env.VITE_API_SERVER}/injections-management?page=${page}&limit=${PAGE_SIZE}&search=${searchText}`, {
         headers: {
             Authorization: session.token
         }
@@ -62,6 +79,51 @@ function InjectionScheduleForAdmin() {
     }
 
     const hasData = Boolean(data?.length)
+
+    const handleInject = async (id) => {
+        setSelectedId(id)
+        onOpen()
+    }
+
+    const handleInjectRequest = async () => {
+        
+        try {
+            await putReq(`injections-register/${selectedId}`, {
+                injected: true
+            });
+            const newData = data.map(i => {
+                if(i.id != selectedId) {
+                    return i
+                }
+
+                return {
+                    ...i,
+                    injected: true,
+                }
+            })
+
+            mutate(newData, {
+                revalidate: false,
+            })
+
+            toast({
+                description: MESSAGE.injectedSuccess,
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+                position: 'top-right'
+            })
+        } catch (error) {
+            toast({
+                description: error.message,
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+                position: 'top-right'
+            })      
+        }
+        onClose()
+    }
 
     return (
         <Layout>   
@@ -103,13 +165,14 @@ function InjectionScheduleForAdmin() {
                                         <Th>Ngày tiêm</Th>
                                         <Th>Email</Th>
                                         <Th>Số điện thoại</Th>
+                                        <Th></Th>
                                     </Tr>
 
                                 </Thead>
                                 <Tbody>
                                     {!hasData && (
                                         <Tr>
-                                            <Td colSpan="4">
+                                            <Td colSpan="5">
                                                 <div className='text-center'>{NO_DATA_FOUND}</div>
                                             </Td>
                                         </Tr>
@@ -121,6 +184,9 @@ function InjectionScheduleForAdmin() {
                                             <Td>{format(new Date(data.injectionDay), 'yyyy-MM-dd')}</Td>
                                             <Td>{data.email}</Td>
                                             <Td>{data.phoneNumber}</Td>
+                                            <Td>{!data.injected && (
+                                                <Link onClick={() => handleInject(data.id)}>Đã tiêm</Link>
+                                            )}</Td>
                                         </Tr>
                                     ))}
                                 </Tbody> 
@@ -156,6 +222,29 @@ function InjectionScheduleForAdmin() {
                                 </Tfoot>
                             </Table>
                         </TableContainer>
+
+                        <AlertDialog
+                            isOpen={isOpen}
+                            leastDestructiveRef={cancelRef}
+                            onClose={onClose}
+                        >
+                            <AlertDialogOverlay>
+                            <AlertDialogContent>
+                                <AlertDialogHeader fontSize='lg' fontWeight='bold'>Hủy lịch sử tiêm</AlertDialogHeader>
+                                <AlertDialogBody>
+                                    Thông tin không thể khôi phục sau khi bạn xóa, bạn chắc chắn muốn xóa?
+                                </AlertDialogBody>
+                                <AlertDialogFooter>
+                                    <Button ref={cancelRef} onClick={onClose}>
+                                        Bỏ qua
+                                    </Button>
+                                    <Button colorScheme='green' onClick={handleInjectRequest} ml={3}>
+                                        Xác nhận
+                                    </Button>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                            </AlertDialogOverlay>
+                        </AlertDialog>
                     </>
                 )}
             </div>
