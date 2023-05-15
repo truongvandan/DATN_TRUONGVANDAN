@@ -91,7 +91,7 @@ function InjectionSchedule() {
                 position: 'top-right'
             })      
         }
-        onClose()
+        onClose() 
     }
 
     const cancelSchedule = (id) => {
