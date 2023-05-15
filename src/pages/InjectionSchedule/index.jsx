@@ -72,7 +72,8 @@ function InjectionSchedule() {
         try {
             await deleteReq(`injections-register/${selectedId}`);
             mutate(
-                data.filter(i => i.id !== selectedId)
+                data.filter(i => i.id !== selectedId),
+                { revalidate: false }
             )
 
             toast({
