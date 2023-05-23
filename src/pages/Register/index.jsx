@@ -3,7 +3,7 @@ import {FormControl, FormLabel, Input, Button, FormErrorMessage, useToast} from 
 import { Formik, Form, Field,  } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
 import { postReq } from '@/services/http-request';
-
+import DatePickerField from '@/components/DatePickerField'
 import { MESSAGE } from '@/contants/message'
 import { ROUTES } from '@/contants/router';
 import { validateEmail, validatePassword, validatePhoneNumber, validateRequired } from '@/helpers/validation'
@@ -43,6 +43,8 @@ function Register() {
                         password: '',
                         name: '',
                         phoneNumber: '',
+                        birthday: '',
+                        address: '',
                     }}
                     onSubmit={doSubmit}
                     >
@@ -84,7 +86,25 @@ function Register() {
                                         <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                                     </FormControl>
                                     )}
-                                </Field>
+                                </Field> 
+                                <Field name='address'>
+                                    {({ field, form }) => (
+                                    <FormControl isInvalid={form.errors.address && form.touched.address}>
+                                        <FormLabel>Địa Chỉ</FormLabel>
+                                        <Input {...field} type='address' />
+                                        <FormErrorMessage>{form.errors.address}</FormErrorMessage>
+                                    </FormControl>
+                                    )}
+                                </Field> 
+                                <Field name='date'>
+                                {({ field, form }) => (
+                                <FormControl isInvalid={form.errors.date && form.touched.date}>
+                                    <FormLabel>Ngày sinh</FormLabel>
+                                    <DatePickerField {...field} type='date' />
+                                    <FormErrorMessage>{form.errors.date}</FormErrorMessage>
+                                </FormControl>
+                                )}
+                                </Field> 
 
                                 <Button colorScheme='blue' type='submit'>Tạo tài khoản</Button>
                                 <Link to={ROUTES.login} className='text-center'>

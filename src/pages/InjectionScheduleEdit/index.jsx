@@ -36,7 +36,6 @@ function InjectionScheduleEdit() {
     async function doSubmit(values) {
         try {
             const submitValue = {
-                ...values,
                 injectionDay: format(values.injectionDay, 'yyyy-MM-dd')
             } 
 
