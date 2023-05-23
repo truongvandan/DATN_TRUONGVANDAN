@@ -6,6 +6,7 @@ import { postReq } from '@/services/http-request';
 import DatePickerField from '@/components/DatePickerField'
 import { MESSAGE } from '@/contants/message'
 import { ROUTES } from '@/contants/router';
+import { format } from 'date-fns'
 import { validateEmail, validatePassword, validatePhoneNumber, validateRequired } from '@/helpers/validation'
 
 function Register() {
@@ -14,7 +15,12 @@ function Register() {
 
     const doSubmit = async (values) => {
         try {
-            await postReq('register', values);
+            const submitValue = {
+                ...values,
+                birthday: format(values.birthday, 'yyyy-MM-dd')
+            } 
+
+            await postReq('register', submitValue);
             toast({
                 description: MESSAGE.createAccountSuccess,
                 status: 'success',
@@ -43,7 +49,7 @@ function Register() {
                         password: '',
                         name: '',
                         phoneNumber: '',
-                        birthday: '',
+                        birthday: new Date(),
                         address: '',
                     }}
                     onSubmit={doSubmit}
@@ -91,19 +97,19 @@ function Register() {
                                     {({ field, form }) => (
                                     <FormControl isInvalid={form.errors.address && form.touched.address}>
                                         <FormLabel>Địa Chỉ</FormLabel>
-                                        <Input {...field} type='address' />
+                                        <Input {...field} />
                                         <FormErrorMessage>{form.errors.address}</FormErrorMessage>
                                     </FormControl>
                                     )}
                                 </Field> 
-                                <Field name='date'>
-                                {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.date && form.touched.date}>
-                                    <FormLabel>Ngày sinh</FormLabel>
-                                    <DatePickerField {...field} type='date' />
-                                    <FormErrorMessage>{form.errors.date}</FormErrorMessage>
-                                </FormControl>
-                                )}
+                                <Field name='birthday'>
+                                    {({ field, form }) => (
+                                        <FormControl isInvalid={form.errors.birthday && form.touched.birthday}>
+                                            <FormLabel>Ngày sinh</FormLabel>
+                                            <DatePickerField {...field} />
+                                            <FormErrorMessage>{form.errors.birthday}</FormErrorMessage>
+                                        </FormControl>
+                                    )}
                                 </Field> 
 
                                 <Button colorScheme='blue' type='submit'>Tạo tài khoản</Button>
